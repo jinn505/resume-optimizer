@@ -2,32 +2,50 @@ from crewai import Crew, Task
 from app.agents.analyzer import analyzer_agent
 from app.agents.optimizer import optimizer_agent
 from app.agents.writer import writer_agent
+from app.agents.extractor import extractor_agent
+from app.agents.refiner import refiner_agent  
 
-def run_optimizer(resume:str,jd:str):
+def run_optimizer(resume: str, jd: str):
+    extractor = extractor_agent()
     analyzer = analyzer_agent()
     optimizer = optimizer_agent()
     writer = writer_agent()
+    refiner = refiner_agent()
 
     task1 = Task(
-        description=f"Analyze the resume:\n{resume}",
-        expected_output="Structured summary of resume in JSON.",
-        agent=analyzer,
+        description=f"""Extract key structured information from both resume and job description:
+Resume:
+{resume}
+
+JD:
+{jd}""",
+        expected_output=(
+            "Return structured JSON with:\n"
+            "- 'projects': List of {title, tools, outcome, duration}\n"
+            "- 'experience': List of {role, company, outcome}\n"
+            "- 'skills': List\n"
+            "- 'jd_requirements': List of job requirements from JD"
+        ),
+        agent=extractor,
     )
 
     task2 = Task(
-    description=(
-        f"Match and highlight how each project, internship, or experience in the resume relates to the following job description:\n{jd}"
-    ),
-    expected_output="Alignment analysis between resume experiences and JD, categorized by each item.",
+        description="Analyze the structured resume and JD to identify clear matches and gaps.",
+        expected_output="JSON showing matching skills and responsibilities, and gaps that need to be addressed.",
+        agent=analyzer,
+    )
+
+    task3 = Task(
+    description="Based on the resume-JD matches and gaps, suggest strategies to better align the resume content with the job requirements.",
+    expected_output="List of alignment strategies, such as keywords to emphasize or skills to highlight.",
     agent=optimizer,
     )
 
 
-    task3 = Task(
-    description="""
-Your job is to extract **exactly 3 valuable and concise bullet points for each project, internship, or work experience** found in the resume and align them with the job description.
+    task4 = Task(
+        description="""Using resume-JD analysis, generate exactly 3 high-quality bullet points per experience/project.
 
-⚠️ Follow this output format strictly (in JSON):
+Format your response in this JSON structure:
 {
   "optimized_resume": {
     "title": "Optimized Resume Bullet Points",
@@ -43,26 +61,47 @@ Your job is to extract **exactly 3 valuable and concise bullet points for each p
       ...
     ]
   }
-}
-
-🔁 For each project or experience, detect its title and return exactly 3 crisp bullet points only.
-
-❌ Do NOT return raw resume JSON
-❌ Do NOT return general paragraphs
-❌ Do NOT return anything outside the JSON format above
-""",
-    expected_output="JSON with 'title' and 'sections'; each section has a 'heading' and list of 3 bullet 'points'.",
-    agent=writer,
+}""",
+        expected_output="Crisp, job-aligned bullet points in the above JSON format.",
+        agent=writer,
     )
 
+    task5 = Task(
+    description="""
+Refine the given resume bullet points for clarity, strength, and alignment with job requirements.
 
+Your goal is to:
+- Make each bullet point more concise and impactful.
+- Ensure each point is clearly aligned with industry hiring standards.
+- Improve readability without changing meaning.
 
+Maintain the same JSON structure:
+{
+  "optimized_resume": {
+    "title": "Optimized Resume Bullet Points",
+    "sections": [
+      {
+        "heading": "Project or Experience Name",
+        "points": [
+          "Refined bullet 1",
+          "Refined bullet 2",
+          "Refined bullet 3"
+        ]
+      },
+      ...
+    ]
+  }
+}
+""",
+    expected_output="Improved bullet points with enhanced clarity and alignment, in the same JSON structure.",
+    agent=refiner,
+    )
 
     crew = Crew(
-        agents=[analyzer,optimizer,writer],
-        tasks = [task1,task2,task3],
-        verbose=True
+        agents=[extractor, analyzer, optimizer, writer, refiner],
+        tasks=[task1, task2, task3, task4,task5],
+        verbose=True,
     )
-    
+
     result = crew.kickoff()
     return result

@@ -8,4 +8,4 @@ def extract_text_from_pdf_file(upload_file) -> str:
 async def load_jd(upload_file):
     content = await upload_file.read()
     return content.decode()
-    
+

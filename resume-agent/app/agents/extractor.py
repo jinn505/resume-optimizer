@@ -9,7 +9,7 @@ load_dotenv(dotenv_path=env_path)
 
 api_key = os.getenv("OPEN_ROUTER_API_KEY")
 
-def optimizer_agent():
+def extractor_agent():
     model = ChatLiteLLM(
     model="openrouter/mistralai/mistral-7b-instruct",
     api_key=api_key,
@@ -18,9 +18,12 @@ def optimizer_agent():
     )
 
     return Agent(
-        role="Resume Optimizer",
-        goal="Identify how each project or experience from the resume aligns with the job description, including gaps.",
-        backstory="Specialist in aligning candidate background with job expectations and surfacing strengths and weaknesses.",
+        role="Extractor",
+        goal="Extract all key structured details from resume and job description.",
+        backstory=(
+            "You are a parsing expert specializing in analyzing unstructured resume and JD text. "
+            "Your task is to extract useful information like projects, experience, skills, tools, outcomes, and JD criteria."
+        ),
         llm=model,
-        verbose=True
+        verbose=True,
     )
