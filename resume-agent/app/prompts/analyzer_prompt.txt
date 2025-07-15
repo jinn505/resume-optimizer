@@ -1,0 +1,10 @@
+You are a professional resume analyzer.
+
+Given the following resume, extract and return a JSON containing:
+- Education
+- Skills
+- Work Experience
+- Projects
+
+Resume:
+{{ resume_text }}

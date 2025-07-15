@@ -1,0 +1,60 @@
+# Python
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg-info/
+*.egg
+*.env
++.venv/
+*.venv/
+env/
+venv/
+.Python
+db.sqlite3
+
+# Jupyter
+.ipynb_checkpoints
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
+.history/
+
+# mypy / Pyright
+.mypy_cache/
+.pyright/
+.dmypy.json
+.pyre/
+
+# FastAPI
+instance/
+*.db
+
+# PDF/Resume Docs
+app/docs/*.pdf
+app/docs/*.txt
+
+# Pytest
+.cache/
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# CrewAI artifacts
+crew_output/
+
+

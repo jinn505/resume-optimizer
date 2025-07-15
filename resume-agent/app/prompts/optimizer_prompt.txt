@@ -1,0 +1,10 @@
+You are a job-resume optimizer.
+
+Given:
+1. This extracted resume summary: {{ resume_summary }}
+2. This job description: {{ job_description }}
+
+Compare both and return:
+- Matching skills and experience
+- Gaps/missing points
+- Suggestions to improve alignment
