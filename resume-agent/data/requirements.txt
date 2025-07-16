@@ -1,0 +1,12 @@
+crewai
+langchain
+langchainhub
+langchain-community
+groq
+pymupdf
+python-dotenv
+tqdm
+langchain-groq
+fastapi
+python-multipart
+sentence-transformers
