@@ -20,12 +20,12 @@ Resume:
 JD:
 {jd}""",
         expected_output=(
-            "Return structured JSON with:\n"
-            "- 'projects': List of {title, tools, outcome, duration}\n"
-            "- 'experience': List of {role, company, outcome}\n"
-            "- 'skills': List\n"
-            "- 'jd_requirements': List of job requirements from JD"
-        ),
+    "Return structured JSON with:\n"
+    "- 'projects': List of {title, tools, outcome, duration}\n"
+    "- 'experience': List of {role, company, outcome}\n"
+    "- 'skills': List\n"
+    "- 'jd': {requirements: List, responsibilities: List, bonus: List}"
+    ),
         agent=extractor,
     )
 
@@ -43,7 +43,14 @@ JD:
 
 
     task4 = Task(
-        description="""Using resume-JD analysis, generate exactly 3 high-quality bullet points per experience/project.
+    description="""Using the structured resume and JD analysis, generate up to 3 high-quality, non-redundant bullet points for each experience and project.
+
+Each bullet point must:
+- Mention specific tools, technologies, or techniques used
+- Clearly describe the candidate’s unique contribution
+- Include measurable outcomes where available
+- Avoid vague phrasing like "collaborated", "communicated" unless critically necessary
+- Avoid repeating similar points across different sections
 
 Format your response in this JSON structure:
 {
@@ -62,9 +69,10 @@ Format your response in this JSON structure:
     ]
   }
 }""",
-        expected_output="Crisp, job-aligned bullet points in the above JSON format.",
-        agent=writer,
+    expected_output="Crisp, specific, and technically-rich bullet points in the given JSON format.",
+    agent=writer,
     )
+
 
     task5 = Task(
     description="""
