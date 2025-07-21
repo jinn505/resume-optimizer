@@ -1,5 +1,5 @@
 
-# 🧠 AI-Powered Resume Optimizer
+# 🧠 AI-Powered Resume Optimizer and ATS checker
 
 This project is an intelligent, multi-agent **Resume Optimizer** built using **FastAPI**, **CrewAI**, and **openrouter's deepseek/deepseek-chat:free** model. It enhances your resume by generating sharp, tailored bullet points aligned with any job description (JD) — ideal for boosting your chances with recruiters and ATS systems.
 
