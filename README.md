@@ -11,8 +11,9 @@ This project is an intelligent, multi-agent **Resume Optimizer** built using **F
 - 🧠 Uses autonomous agents (Analyzer, Optimizer, Writer) via CrewAI
 - ✍️ Generates **3 impactful bullet points per experience or project**
 - 🎯 Ensures JD alignment and technical relevance
-- ⚡ Powered by Groq’s LLaMA 3.1 8B for blazing-fast generation
+- ⚡ Powered by openrouter’s deepseek/deepseek-chat:free for blazing-fast generation
 - 🌐 Easy API access with FastAPI
+- 👊 ATS checker to check if your resume is good enough to shortlist you for the job.
 
 ---
 
@@ -31,7 +32,7 @@ This project is an intelligent, multi-agent **Resume Optimizer** built using **F
 ```
 resume-agent/
 ├── app/
-│   ├── agents/              # CrewAI agents: analyzer, optimizer, writer
+│   ├── agents/              # CrewAI agents: extractor, extractor_ats,analyzer, optimizer, writer, refiner
 │   ├── utils/               # Helpers: file parsing, formatting, etc.
 │   ├── docs/                # Uploaded resumes and JDs
 │   ├── main.py              # FastAPI backend
