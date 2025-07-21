@@ -1,7 +1,7 @@
 
-# 🧠 AI-Powered Resume Optimizer
+# 🧠 AI-Powered Resume Optimizer and ATS checker
 
-This project is an intelligent, multi-agent **Resume Optimizer** built using **FastAPI**, **CrewAI**, and **Groq’s LLaMA 3.1 8B** model. It enhances your resume by generating sharp, tailored bullet points aligned with any job description (JD) — ideal for boosting your chances with recruiters and ATS systems.
+This project is an intelligent, multi-agent **Resume Optimizer** built using **FastAPI**, **CrewAI**, and **openrouter's deepseek/deepseek-chat:free** model. It enhances your resume by generating sharp, tailored bullet points aligned with any job description (JD) — ideal for boosting your chances with recruiters and ATS systems.
 
 ---
 
@@ -11,19 +11,19 @@ This project is an intelligent, multi-agent **Resume Optimizer** built using **F
 - 🧠 Uses autonomous agents (Analyzer, Optimizer, Writer) via CrewAI
 - ✍️ Generates **3 impactful bullet points per experience or project**
 - 🎯 Ensures JD alignment and technical relevance
-- ⚡ Powered by Groq’s LLaMA 3.1 8B for blazing-fast generation
+- ⚡ Powered by openrouter’s deepseek/deepseek-chat:free for blazing-fast generation
 - 🌐 Easy API access with FastAPI
+- 👊 ATS checker to check if your resume is good enough to shortlist you for the job.
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **Backend:** FastAPI  
-- **LLM Provider:** Groq (LLaMA 3.1 8B Instant)  
+- **LLM Provider:** Openrouter (mistralai/mistral-7b-instruct & deepseek/deepseek-chat:free)  
 - **Agent Orchestration:** CrewAI  
 - **LangChain Integration:** Langchain + OutputParser  
-- **File Handling:** PyMuPDF, PDFplumber  
-- **Optional:** JWT Auth, Qdrant Vector Store  
+- **File Handling:** PyMuPDF, PDFplumber   
 
 ---
 
@@ -32,7 +32,7 @@ This project is an intelligent, multi-agent **Resume Optimizer** built using **F
 ```
 resume-agent/
 ├── app/
-│   ├── agents/              # CrewAI agents: analyzer, optimizer, writer
+│   ├── agents/              # CrewAI agents: extractor, extractor_ats,analyzer, optimizer, writer, refiner
 │   ├── utils/               # Helpers: file parsing, formatting, etc.
 │   ├── docs/                # Uploaded resumes and JDs
 │   ├── main.py              # FastAPI backend
