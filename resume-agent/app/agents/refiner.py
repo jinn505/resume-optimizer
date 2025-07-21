@@ -27,6 +27,8 @@ def refiner_agent():
             "You improve phrasing, strengthen action verbs, and ensure every bullet reflects key job description terms. "
             "Your focus is to subtly rephrase and enhance each point while preserving structure and meaning."
         ),
+        output_format = ("Constraint:\n"
+            "- Output EXACTLY 3 bullet points per section\n"),
         llm=model,
         verbose=True,
     )
