@@ -1,7 +1,7 @@
 
 # 🧠 AI-Powered Resume Optimizer
 
-This project is an intelligent, multi-agent **Resume Optimizer** built using **FastAPI**, **CrewAI**, and **Groq’s LLaMA 3.1 8B** model. It enhances your resume by generating sharp, tailored bullet points aligned with any job description (JD) — ideal for boosting your chances with recruiters and ATS systems.
+This project is an intelligent, multi-agent **Resume Optimizer** built using **FastAPI**, **CrewAI**, and **openrouter's deepseek/deepseek-chat:free** model. It enhances your resume by generating sharp, tailored bullet points aligned with any job description (JD) — ideal for boosting your chances with recruiters and ATS systems.
 
 ---
 
@@ -19,11 +19,10 @@ This project is an intelligent, multi-agent **Resume Optimizer** built using **F
 ## 🛠️ Tech Stack
 
 - **Backend:** FastAPI  
-- **LLM Provider:** Groq (LLaMA 3.1 8B Instant)  
+- **LLM Provider:** Openrouter (mistralai/mistral-7b-instruct & deepseek/deepseek-chat:free)  
 - **Agent Orchestration:** CrewAI  
 - **LangChain Integration:** Langchain + OutputParser  
-- **File Handling:** PyMuPDF, PDFplumber  
-- **Optional:** JWT Auth, Qdrant Vector Store  
+- **File Handling:** PyMuPDF, PDFplumber   
 
 ---
 
