@@ -4,7 +4,7 @@ from typing import List
 
 class ResumeSection(BaseModel):
     heading: str
-    points: List[str] = Field(..., min_items=3, max_items=3)
+    points: List[str] = Field(..., min_items=1, max_items = 3)
 
 class ResumeOutput(BaseModel):
     title: str

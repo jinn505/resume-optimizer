@@ -10,7 +10,7 @@ api_key = os.getenv("OPEN_ROUTER_API_KEY")
 
 def extractor_agent():
     model = ChatLiteLLM(
-        model="openrouter/deepseek/deepseek-chat:free",  
+        model = "openrouter/mistralai/mistral-7b-instruct:free", 
         api_key=api_key,
         api_base="https://openrouter.ai/api/v1",
         temperature=0.4
